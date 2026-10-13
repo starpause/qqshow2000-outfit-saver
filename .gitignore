@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Caches and local data
+.cache/
+test_*
+test_download/
+outputs/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
