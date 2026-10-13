@@ -14,7 +14,7 @@
 
 Met [Viola](https://viola.city) at [TIAT postgeneration](https://luma.com/postgeneration). She was showing something totally different. I found her [Qzone Museum](https://viola.city) on her site and fell in.
 
-It felt familiar. 1996, anime fan, no resources. [KiSS dolls](https://en.wikipedia.org/wiki/Kisekae_Set_System) were a huge step up from uuencoded images off Usenet. Download a doll, dress it up, get the whole character. All fan made. I was running Dragon Ball Project then, sourcing raws / scans / lettering, Jason on translations. KiSS was my guilty pleasure too. Not allowed to have dolls, so I played dress up without asking permission.
+It felt familiar. 1996, anime fan, no resources. [KiSS dolls](https://en.wikipedia.org/wiki/Kisekae_Set_System) were a huge step up from uuencoded images off Usenet. Download a doll, dress it up, get the whole character. All fan made. I was running [Dragon Ball Project](https://www.insidescanlation.com/spotlight/translators) then, sourcing raws / scans / lettering, Jason on translations. KiSS was my guilty pleasure too. Not allowed to have dolls, so I played dress up without asking permission.
 
 Six weeks in China with my 6 month old, meeting family, made it click again. QZone next to MySpace in my head. Same era. Your own space, vibrant customization. Computer lib as a global phenomenon.
 
