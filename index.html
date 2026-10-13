@@ -913,19 +913,41 @@
         const numFrames = reader.numFrames();
         const frames = [];
         const delays = [];
+        const width = reader.width;
+        const height = reader.height;
+        let canvasPixels = new Uint8ClampedArray(width * height * 4);
+
         for (let i = 0; i < numFrames; i++) {
           const frameInfo = reader.frameInfo(i);
-          const rgba = new Uint8ClampedArray(reader.width * reader.height * 4);
-          reader.decodeAndBlitFrameRGBA(i, rgba);
-          frames.push(new ImageData(rgba, reader.width, reader.height));
+          let backup = null;
+          if (frameInfo.disposal === 3) {
+            backup = new Uint8ClampedArray(canvasPixels);
+          }
+
+          reader.decodeAndBlitFrameRGBA(i, canvasPixels);
+          frames.push(new ImageData(new Uint8ClampedArray(canvasPixels), width, height));
           const dur = Math.max((frameInfo.delay || 10) * 10, 20);
           delays.push(dur);
+
+          if (frameInfo.disposal === 2) {
+            for (let y = frameInfo.y; y < frameInfo.y + frameInfo.height; y++) {
+              for (let x = frameInfo.x; x < frameInfo.x + frameInfo.width; x++) {
+                const idx = (y * width + x) * 4;
+                canvasPixels[idx] = 0;
+                canvasPixels[idx + 1] = 0;
+                canvasPixels[idx + 2] = 0;
+                canvasPixels[idx + 3] = 0;
+              }
+            }
+          } else if (frameInfo.disposal === 3) {
+            canvasPixels = backup;
+          }
         }
         return {
           frames,
           delays,
-          width: reader.width,
-          height: reader.height,
+          width,
+          height,
           totalCycle: delays.reduce((a, b) => a + b, 0),
         };
       } else {
@@ -1131,18 +1153,29 @@
         if (isTransparent) {
           const palette = quantize(rgba, 256, { format: "rgba4444" });
           const index = applyPalette(rgba, palette, "rgba4444");
-          gif.writeFrame(index, outWidth, outHeight, {
-            palette,
-            delay: dur,
-            transparent: true,
-            transparentIndex: 0,
-          });
+          const transparentIndex = palette.findIndex((c) => c[3] < 128);
+          if (transparentIndex >= 0) {
+            gif.writeFrame(index, outWidth, outHeight, {
+              palette,
+              delay: dur,
+              transparent: true,
+              transparentIndex,
+              dispose: 2,
+            });
+          } else {
+            gif.writeFrame(index, outWidth, outHeight, {
+              palette,
+              delay: dur,
+              dispose: 2,
+            });
+          }
         } else {
           const palette = quantize(rgba, 256, { format: "rgb565" });
           const index = applyPalette(rgba, palette, "rgb565");
           gif.writeFrame(index, outWidth, outHeight, {
             palette,
             delay: dur,
+            dispose: 2,
           });
         }
       }
