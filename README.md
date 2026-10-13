@@ -5,16 +5,16 @@
 <p align="center">
   <img src="qqshow_e9fn6oxd_My_Outfit.gif" alt="QQ Show Composited Avatar" width="280">
   <br>
-  <em>Sample composited outfit (ID: <code>e9fn6oxd</code>) — 11 animated layers synchronized at 2x scale</em>
+  <em>Sample composited outfit (ID: <code>e9fn6oxd</code>), with 11 animated layers synchronized at 2x scale</em>
 </p>
 
 ---
 
 ## 🌸 About & Cultural Context
 
-Back in the day, **staRpauSe** had a great time playing with [KiSS dolls](https://en.wikipedia.org/wiki/Kisekae_Set_System) (Kisekae Set System). It's really cool to see early character configurators built for pure personal expression and digital identity—avatars that comfortably predate the modern NFT PFP craze and remain vital cultural touchpoints of early web history to preserve for future generations to discover themselves.
+Back in the day, **staRpauSe** had a great time playing with [KiSS dolls](https://en.wikipedia.org/wiki/Kisekae_Set_System) (Kisekae Set System). It's really cool to see early character configurators built for pure personal expression and digital identity. These avatars comfortably predate the modern NFT PFP craze and remain vital cultural touchpoints of early web history to preserve for future generations to discover themselves.
 
-We discovered the QQ Show revival via **[viola.city's Qzone Museum](https://viola.city/projects/qzone-museum/)**—a wonderful rabbit hole into Y2K Chinese web culture.
+We discovered the QQ Show revival via **[viola.city's Qzone Museum](https://viola.city/projects/qzone-museum/)**, a wonderful rabbit hole into Y2K Chinese web culture.
 
 A huge shout-out to **[Kay Zeng](https://www.kayzeng.com/)** for her brilliant work designing and resurrecting **[qqshow2000.com](https://qqshow2000.com)**!
 
@@ -26,7 +26,7 @@ A huge shout-out to **[Kay Zeng](https://www.kayzeng.com/)** for her brilliant w
 
 QQ Show was directly inspired by Sayclub, one of Korea's biggest chat platforms in the 2000s, which gradually lost ground a decade later due to competition and failing to adapt to the emerging smartphone era. In a different trajectory, Tencent won its home market with its technology and product strategy. QQ Show achieved massive scale in China, attracting over 100 million users and establishing virtual goods as a major revenue stream. 
 
-The aesthetic featured the "purikura" and "blingee" style popular in early 2000s Asia—sparkly graphics, bright colors, and maximalist design elements that were part of the broader Y2K cultural movement. Despite shaping the internet culture and aesthetic for hundreds of millions of users in China, QQ Show remains relatively unknown outside the Chinese internet spheres. 
+The aesthetic featured the "purikura" and "blingee" style popular in early 2000s Asia: sparkly graphics, bright colors, and maximalist design elements that were part of the broader Y2K cultural movement. Despite shaping the internet culture and aesthetic for hundreds of millions of users in China, QQ Show remains relatively unknown outside the Chinese internet spheres. 
 
 [qqshow2000.com](https://qqshow2000.com) recreates QQ Show using GIF assets recovered from the [Internet Archive Wayback Machine](https://archive.org/), aiming to make its mark on Chinese internet history visible to the international internet community.
 
@@ -42,7 +42,8 @@ The aesthetic featured the "purikura" and "blingee" style popular in early 2000s
 
 QQ秀的创建借鉴了Sayclub，2000年代韩国最大的聊天平台之一。Sayclub在后来由于竞争和未能适应新兴的智能手机时代而在韩国逐渐失去了市场地位。腾讯则走向了不同的轨迹，凭借其技术和产品策略赢得了本土市场竞争。QQ秀在中国取得了巨大成功，吸引了超过1亿用户，并确立了虚拟商品作为主要收入来源的商业模式。 
 
-其美学风格具有2000年代初期亚洲流行的"大头贴"和"闪图"特色——闪闪发光的图形、明亮的色彩和极繁主义设计元素，这些都是更广泛的Y2K文化运动的一部分。尽管QQ秀影响了中国数亿用户和早期的中国互联网文化审美，但在中文互联网以外仍相对不为人知。此项目使用从[Internet Archive Wayback Machine](https://archive.org/)恢复收集的gif素材重现QQ秀，旨在让中国互联网历史上的这一印记被更广阔的互联网社区看见。
+其美学风格具有2000年代初期亚洲流行的"大头贴"和"闪图"特色，包括闪闪发光的图形、明亮的色彩和极繁主义设计元素，这些都是更广泛的Y2K文化运动的一部分。尽管QQ秀影响了中国数亿用户和早期的中国互联网文化审美，但在中文互联网以外仍相对不为人知。此项目使用从[Internet Archive Wayback Machine](https://archive.org/)恢复收集的gif素材重现QQ秀，旨在让中国互联网历史上的这一印记被更广阔的互联网社区看见。
+
 
 qqshow2000.com由[Kay Zeng](https://www.kayzeng.com/)设计制作。时至今日，她已经忘记了自己曾在QQ秀和各种钻石会员上花了多少钱。
 
@@ -70,19 +71,34 @@ Furthermore, each animated layer has its own frame delays and loop timings (e.g.
 
 ---
 
-## ⚡ Features
+## 🌐 Live Web App
 
-- **Pixel-Art Crisp Scaling:** Export at native **1x** (140×226) or integer-scaled **2x** (280×452), **3x** (420×678), or **4x** (560×904) with nearest-neighbor interpolation.
-- **Background Modes:** `auto` (preserves background scene or canvas), `transparent` (alpha-channel GIF transparency), or custom hex colors.
-- **History & Faved Fits:** A built-in browser-local history box (`localStorage`) tracks your saved fits with one-click **Load**, **QQ Show link**, and **Copy URL** buttons. Never posted or stored on any external server.
-- **Dual Interfaces:** Use the retro **Web UI** or the **Command Line Interface (CLI)**.
-- **Zero Heavy Dependencies:** Written in standard Python 3 and Pillow. The local web server uses Python's built-in `http.server`.
+You can run the web app directly in your browser with **no installation or backend required**:
+
+👉 **[https://starpause.github.io/qqshow2000-outfit-saver/](https://starpause.github.io/qqshow2000-outfit-saver/)**
+
+The entire pipeline runs 100% client-side in the browser: it queries Supabase for the outfit blueprint, fetches the GIF assets, decodes frames via `omggif`, synchronizes the animation timeline, and renders the composite animated GIF using `gifenc`.
+
+<p align="center">
+  <img src="screenshot.jpg" alt="QQ Show Outfit Saver Web UI" width="640">
+</p>
 
 ---
 
-## 🛠️ Installation
+## ⚡ Features
 
-Only Python 3 and Pillow are required:
+- **100% Serverless Web App:** Runs entirely in modern browsers on GitHub Pages or locally.
+- **Pixel-Art Crisp Scaling:** Export at native **1x** (140x226) or integer-scaled **2x** (280x452), **3x** (420x678), or **4x** (560x904) with nearest-neighbor interpolation.
+- **Background Modes:** `auto` (preserves background scene or canvas), `transparent` (alpha-channel GIF transparency), or custom hex colors.
+- **History & Faved Fits:** A built-in browser-local history box (`localStorage`) tracks your saved fits with one-click **Load**, **QQ Show link**, and **Copy URL** buttons. Never posted or stored on any external server.
+- **Dual Interfaces:** Use the web app (hosted or local) or the Python **Command Line Interface (CLI)**.
+- **Zero Heavy Dependencies:** Python tools require only standard Python 3 and Pillow.
+
+---
+
+## 🛠️ Installation & Local Usage
+
+If you prefer to run it locally or use the CLI:
 
 ```bash
 git clone https://github.com/starpause/qqshow2000-outfit-saver.git
@@ -90,13 +106,7 @@ cd qqshow2000-outfit-saver
 pip install pillow
 ```
 
----
-
-## 🖥️ Usage
-
-### 1. Retro Web UI
-
-Launch the local web app:
+### 1. Local Web App
 
 ```bash
 python server.py
@@ -112,6 +122,7 @@ Then open **[http://localhost:8080](http://localhost:8080)** in your browser:
 - Your generated outfits are automatically saved in the **History - Fits You Faved** box below.
 
 ---
+
 
 ### 2. Command-Line Interface (CLI)
 

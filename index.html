@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QQ Show 2000 - Animated Outfit Saver</title>
+  <link rel="icon" href="https://qqshow2000.com/assets/qqshow_icon-DtnSGaFa.PNG">
+  
+  <!-- Standalone Browser GIF Decoders & Encoders (Local vendor with CDN fallback) -->
+  <script src="vendor/omggif.js"></script>
+  <script src="vendor/gifenc.js"></script>
+  <script>
+    // Fallback to CDN if opened in an environment where vendor/ is not found
+    if (typeof GifReader === 'undefined') {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/omggif@1.0.10/omggif.min.js"><\\/script>');
+    }
+    if (typeof GIFEncoder === 'undefined') {
+      document.write('<script src="https://unpkg.com/gifenc@1.0.3/dist/gifenc.js"><\\/script>');
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-color: #f0edf6;
+      --window-bg: #ece9d8;
+      --window-border: #0055ea;
+      --titlebar-start: #0058ee;
+      --titlebar-end: #3f95ff;
+      --btn-face: #f0f0f0;
+      --btn-border: #7f9db9;
+      --text: #222;
+      --accent: #ff4081;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(circle at 10% 20%, #ffeaf1 0%, #f1edfc 50%, #e2f1fc 100%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .main-window {
+      width: 100%;
+      max-width: 900px;
+      background: #ffffff;
+      border: 2px solid #5a667d;
+      border-radius: 8px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .window-header {
+      background: linear-gradient(90deg, #595085 0%, #8b7cb6 100%);
+      color: white;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .window-title {
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .window-title a {
+      color: inherit;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.15s;
+    }
+
+    .window-title a:hover {
+      text-decoration: underline;
+      opacity: 0.9;
+    }
+
+    .window-title img {
+      width: 20px;
+      height: 20px;
+      image-rendering: pixelated;
+    }
+
+    .window-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .intro-banner {
+      background: #faf7ff;
+      border: 1px solid #d9d2ea;
+      border-radius: 6px;
+      padding: 14px 18px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #4a3e66;
+    }
+
+    .intro-banner strong {
+      color: #2e1d52;
+    }
+
+    .banner-link {
+      color: #595085;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color 0.15s;
+    }
+
+    .banner-link:hover {
+      color: #ee3a76;
+    }
+
+    .banner-link code {
+      color: inherit;
+      background: rgba(124, 92, 183, 0.08);
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    .input-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .options-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 12px 16px;
+      background: #fbfbfd;
+      border: 1px solid #e5e2ed;
+      border-radius: 6px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: #444;
+    }
+
+    .option-item select {
+      padding: 6px 10px;
+      border: 1px solid #b8b3c7;
+      border-radius: 4px;
+      background: white;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .url-input-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .url-input {
+      flex: 1;
+      min-width: 280px;
+      padding: 12px 14px;
+      font-size: 15px;
+      border: 2px solid #b6b0c9;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      font-family: monospace;
+    }
+
+    .url-input:focus {
+      border-color: #7c5cb7;
+      box-shadow: 0 0 0 3px rgba(124, 92, 183, 0.2);
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #ff6fa0 0%, #ee3a76 100%);
+      color: white;
+      border: 1px solid #d22862;
+      border-radius: 6px;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      box-shadow: 0 2px 4px rgba(238, 58, 118, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(180deg, #ff82ad 0%, #fc4a84 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(238, 58, 118, 0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px);
+      box-shadow: none;
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .example-chips {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .chip {
+      background: #ede8f5;
+      color: #554477;
+      padding: 4px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: monospace;
+      font-size: 12px;
+      border: 1px solid #d4cde2;
+      transition: background 0.15s;
+    }
+
+    .chip:hover {
+      background: #dfd7ee;
+    }
+
+    /* Result Stage */
+    .result-section {
+      display: none;
+      grid-template-columns: 320px 1fr;
+      gap: 24px;
+      margin-top: 10px;
+      padding-top: 20px;
+      border-top: 2px dashed #ded9e8;
+    }
+
+    @media (max-width: 768px) {
+      .result-section {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .preview-box {
+      background: #faf9fd;
+      border: 1px solid #dcd7e6;
+      border-radius: 8px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .preview-viewport {
+      width: 280px;
+      height: 452px;
+      border-radius: 6px;
+      border: 2px solid #c9c4d4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background-color: #f8f8f8;
+      background-image: 
+        linear-gradient(45deg, #eee 25%, transparent 25%), 
+        linear-gradient(-45deg, #eee 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #eee 75%), 
+        linear-gradient(-45deg, transparent 75%, #eee 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+    }
+
+    .preview-viewport img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+      image-rendering: pixelated;
+    }
+
+    .download-btn {
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+      color: white;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 15px;
+      border: 1px solid #047857;
+      display: block;
+      box-shadow: 0 2px 4px rgba(5, 150, 105, 0.3);
+      transition: all 0.15s;
+    }
+
+    .download-btn:hover {
+      background: linear-gradient(180deg, #34d399 0%, #10b981 100%);
+      transform: translateY(-1px);
+    }
+
+    .details-box {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .meta-card {
+      background: #fbfbfd;
+      border: 1px solid #e3dfed;
+      border-radius: 6px;
+      padding: 14px 18px;
+    }
+
+    .meta-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #3b2d56;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .meta-pill {
+      background: #ffffff;
+      border: 1px solid #dfdae8;
+      border-radius: 4px;
+      padding: 6px 10px;
+    }
+
+    .meta-pill span {
+      display: block;
+      color: #887e9c;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .meta-pill strong {
+      color: #2d2242;
+      font-size: 14px;
+    }
+
+    .layers-table-card {
+      background: #ffffff;
+      border: 1px solid #e3dfed;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .layers-header {
+      background: #f4f1f8;
+      padding: 10px 14px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #493b63;
+      border-bottom: 1px solid #e3dfed;
+    }
+
+    .layers-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .layers-table th, .layers-table td {
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid #f0ecf6;
+    }
+
+    .layers-table th {
+      background: #faf8fc;
+      color: #716686;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .z-tag {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #efeaf7;
+      color: #63459c;
+      font-weight: 700;
+      font-size: 11.5px;
+      font-family: monospace;
+    }
+
+    .loading-spinner {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 24px;
+      color: #554477;
+      font-weight: 600;
+    }
+
+    .spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid #ded9ea;
+      border-top-color: #ee3a76;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .error-banner {
+      display: none;
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      color: #be123c;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    /* History / Faved Fits Section */
+    .history-window {
+      margin-top: 4px;
+    }
+
+    .history-header-right {
+      font-size: 12.5px;
+      font-style: italic;
+      color: #f1edfb;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .history-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 14px;
+      background: #faf9fd;
+      border: 1px solid #e2dded;
+      border-radius: 6px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .history-item:hover {
+      background: #f4effb;
+      border-color: #cbbfe0;
+    }
+
+    .history-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      min-width: 0;
+    }
+
+    .history-id {
+      font-family: monospace;
+      font-weight: 700;
+      color: #554477;
+      background: #ece7f6;
+      border: 1px solid #dcd5eb;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .history-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: #2e1d52;
+    }
+
+    .history-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      background: #ffffff;
+      border: 1px solid #b8b1cb;
+      color: #493b63;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s;
+      user-select: none;
+    }
+
+    .btn-action:hover {
+      background: #f0eaf8;
+      border-color: #7c5cb7;
+      color: #2e1d52;
+      transform: translateY(-1px);
+    }
+
+    .btn-action.btn-copy {
+      min-width: 78px;
+      justify-content: center;
+    }
+
+    .btn-action.btn-copy.copied {
+      background: #ecfdf5;
+      border-color: #10b981;
+      color: #059669;
+    }
+
+    .btn-action.btn-delete {
+      color: #999;
+      border-color: transparent;
+      padding: 6px 8px;
+    }
+
+    .btn-action.btn-delete:hover {
+      color: #dc2626;
+      background: #fee2e2;
+    }
+
+    .history-empty {
+      padding: 24px;
+      text-align: center;
+      color: #887e9c;
+      font-size: 13.5px;
+      font-style: italic;
+      background: #faf9fd;
+      border: 1px dashed #ded9e8;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-window">
+    <div class="window-header">
+      <div class="window-title">
+        <a href="https://qqshow2000.com/" target="_blank" rel="noopener noreferrer">
+          <img src="https://qqshow2000.com/assets/qqshow_icon-DtnSGaFa.PNG" alt="icon">
+          <span>QQ Show 2000</span>
+        </a>
+        <span style="opacity: 0.9; font-weight: normal;">- Animated Outfit Saver</span>
+      </div>
+      <div style="font-size: 12px; opacity: 0.85;">Client-Side Engine (100% Serverless)</div>
+    </div>
+
+    <div class="window-body">
+      <div class="intro-banner">
+        <strong>Preserve your <a href="https://qqshow2000.com/" target="_blank" rel="noopener noreferrer" class="banner-link">QQ Show avatars</a>:</strong> Paste any outfit link (e.g. <a href="https://qqshow2000.com/?id=e9fn6oxd" target="_blank" rel="noopener noreferrer" class="banner-link"><code>https://qqshow2000.com/?id=e9fn6oxd</code></a>) to download all animated layer GIFs, composite them at their exact z-index stack, align their animation frame cycles, and render a complete animated GIF directly in your browser!
+      </div>
+
+      <div class="input-section">
+        <div class="options-row">
+          <div class="option-item">
+            <label for="scaleSelect"><strong>Scale:</strong></label>
+            <select id="scaleSelect">
+              <option value="1">1x Native (140 x 226)</option>
+              <option value="2" selected>2x Crisp (280 x 452)</option>
+              <option value="3">3x HD (420 x 678)</option>
+              <option value="4">4x Ultra (560 x 904)</option>
+            </select>
+          </div>
+
+          <div class="option-item">
+            <label for="bgSelect"><strong>Background:</strong></label>
+            <select id="bgSelect">
+              <option value="auto" selected>Auto (Asset bg or #f8f8f8)</option>
+              <option value="transparent">Transparent (Checkerboard)</option>
+              <option value="canvas">Site Canvas (#f8f8f8)</option>
+              <option value="#ffffff">White (#ffffff)</option>
+              <option value="#000000">Black (#000000)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="url-input-group">
+          <input 
+            type="text" 
+            id="urlInput" 
+            class="url-input" 
+            placeholder="Paste URL or ID (e.g. https://qqshow2000.com/?id=e9fn6oxd)"
+            value="https://qqshow2000.com/?id=e9fn6oxd"
+          >
+          <button id="generateBtn" class="btn-primary" onclick="generateOutfit()">
+            <span>Generate GIF</span>
+          </button>
+        </div>
+
+        <div class="example-chips">
+          <span>Examples:</span>
+          <span class="chip" onclick="setInput('https://qqshow2000.com/?id=e9fn6oxd')">e9fn6oxd (Full Outfit)</span>
+          <span class="chip" onclick="setInput('e9fn6oxd')">Raw ID (e9fn6oxd)</span>
+        </div>
+      </div>
+
+      <div id="loading" class="loading-spinner">
+        <div class="spinner"></div>
+        <span id="loadingText">Downloading layer GIFs and calculating animation timeline...</span>
+      </div>
+
+      <div id="errorBanner" class="error-banner"></div>
+
+      <div id="resultSection" class="result-section">
+        <div class="preview-box">
+          <div class="preview-viewport">
+            <img id="previewImg" src="" alt="Composited Outfit">
+          </div>
+          <a id="downloadLink" href="#" download="" class="download-btn">
+            Download Animated GIF
+          </a>
+        </div>
+
+        <div class="details-box">
+          <div class="meta-card">
+            <div class="meta-title">
+              <span id="outfitName">Outfit Name</span>
+              <span id="outfitIdTag" class="z-tag">ID: ...</span>
+            </div>
+            <div class="meta-grid">
+              <div class="meta-pill">
+                <span>Dimensions</span>
+                <strong id="metaDimensions">280 x 452</strong>
+              </div>
+              <div class="meta-pill">
+                <span>Frames</span>
+                <strong id="metaFrames">64</strong>
+              </div>
+              <div class="meta-pill">
+                <span>Loop Duration</span>
+                <strong id="metaDuration">6.0s</strong>
+              </div>
+              <div class="meta-pill">
+                <span>File Size</span>
+                <strong id="metaSize">2.3 MB</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="layers-table-card">
+            <div class="layers-header">
+              Composited Layer Stack (<span id="layersCount">0</span> layers)
+            </div>
+            <table class="layers-table">
+              <thead>
+                <tr>
+                  <th>z-index</th>
+                  <th>Category</th>
+                  <th>Item Name</th>
+                  <th>Frames</th>
+                  <th>Cycle</th>
+                </tr>
+              </thead>
+              <tbody id="layersBody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- History / Fits You Faved Window -->
+  <div class="main-window history-window">
+    <div class="window-header">
+      <div class="window-title">
+        <strong>History</strong> &nbsp;- Fits You Faved
+      </div>
+      <div class="history-header-right">
+        <em>Private Local Storage (stored only on your device)</em>
+      </div>
+    </div>
+
+    <div class="window-body">
+      <div id="historyContainer" class="history-list">
+        <!-- Rendered dynamically from localStorage -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = "https://iuthwndljsjdwhzlxopz.supabase.co";
+    const SUPABASE_ANON_KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
+      "eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1dGh3bmRsanNqZHdoemx4b3B6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg2MTM2MTUsImV4cCI6MjA3NDE4OTYxNX0." +
+      "q-0qS8L5lpSB-ttj1HK2wfYTu0wM44KuEJ7FhKbz2oQ";
+
+    const LAYER_Z_INDEX = {
+      backgrounds: 0,
+      "background-decor": 1,
+      vehicle: 2,
+      wings: 3,
+      backHair: 4,
+      bottom: 5,
+      hair: 6,
+      top: 7,
+      outfit: 8,
+      makeup: 9,
+      "head-set": 10,
+      frontHair: 11,
+      neckwear: 11,
+      earrings: 12,
+      "face-decor": 13,
+      glasses: 14,
+      headwear: 15,
+      "other-accessories": 16,
+      frame: 17,
+      text: 18,
+      companion: 19,
+      sparkle: 20,
+    };
+
+    const TIE_BREAKER_ORDER = { bottom: 0, outfit: 1, top: 2 };
+
+    const DEFAULT_ITEMS = {
+      frontHair: {
+        id: "default_frontHair",
+        name: "默认前头发",
+        image: "/assets/front-hair/default.gif",
+        category: "frontHair",
+        layer: 10,
+      },
+      backHair: {
+        id: "default_backHair",
+        name: "默认后头发",
+        image: "/assets/back-hair/default.gif",
+        category: "backHair",
+        layer: 5,
+      },
+      bottom: {
+        id: "default_bottom",
+        name: "默认下装",
+        image: "/assets/bottom/default.gif",
+        category: "bottom",
+        layer: 5,
+      },
+      top: {
+        id: "default_top",
+        name: "默认上装",
+        image: "/assets/top/default.gif",
+        category: "top",
+        layer: 6,
+      },
+      makeup: {
+        id: "default_makeup",
+        name: "默认妆容",
+        image: "/assets/makeup/default.png",
+        category: "makeup",
+        layer: 8,
+      },
+    };
+
+    const FAVES_KEY = 'qqshow_faved_fits';
+
+    function setInput(val) {
+      document.getElementById('urlInput').value = val;
+    }
+
+    function formatBytes(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(2) + ' MB';
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function extractOutfitId(urlOrId) {
+      const cleaned = urlOrId.trim();
+      const m = cleaned.match(/[?&#]id=([a-zA-Z0-9_-]+)/);
+      if (m) return m[1];
+      if (/^[a-zA-Z0-9_-]{4,40}$/.test(cleaned)) return cleaned;
+      const m2 = cleaned.match(/([a-zA-Z0-9_-]{6,30})\/?$/);
+      if (m2) return m2[1];
+      throw new Error(`Could not parse a valid QQ Show outfit ID from "${urlOrId}"`);
+    }
+
+    function gcd(a, b) {
+      while (b) {
+        let t = b;
+        b = a % b;
+        a = t;
+      }
+      return a;
+    }
+
+    function lcm(a, b) {
+      return a && b ? Math.abs(a * b) / gcd(a, b) : 0;
+    }
+
+    function resolveLayers(outfitData) {
+      const outfitSlots = outfitData.outfit || {};
+      const layers = [];
+      const present = new Set();
+      const suppressed = new Set();
+
+      for (const [category, item] of Object.entries(outfitSlots)) {
+        if (!item) continue;
+        if (category === "hair" && item.frontHair) {
+          if (item.backHair) {
+            layers.push({ ...item.backHair, category: "backHair", isDefault: false });
+            present.add("backHair");
+          }
+          layers.push({ ...item.frontHair, category: "frontHair", isDefault: false });
+          present.add("frontHair");
+          suppressed.add("frontHair");
+          suppressed.add("backHair");
+        } else {
+          layers.push({ ...item, category, isDefault: false });
+          present.add(category);
+        }
+
+        if (category === "head-set") {
+          suppressed.add("hair");
+          suppressed.add("frontHair");
+          suppressed.add("backHair");
+          suppressed.add("makeup");
+        }
+        if (category === "frontHair" || category === "backHair") suppressed.add("hair");
+        if (category === "outfit") {
+          suppressed.add("top");
+          suppressed.add("bottom");
+        }
+      }
+
+      for (const catName of Object.keys(LAYER_Z_INDEX)) {
+        if (!present.has(catName) && !suppressed.has(catName)) {
+          const def = DEFAULT_ITEMS[catName];
+          if (def) layers.push({ ...def, isDefault: true });
+        }
+      }
+
+      layers.sort((a, b) => {
+        const za = LAYER_Z_INDEX[a.category] ?? 999;
+        const zb = LAYER_Z_INDEX[b.category] ?? 999;
+        if (za !== zb) return za - zb;
+        const ta = TIE_BREAKER_ORDER[a.category] ?? 0;
+        const tb = TIE_BREAKER_ORDER[b.category] ?? 0;
+        return ta - tb;
+      });
+
+      return layers;
+    }
+
+    async function loadLayerAsset(imageRelPath) {
+      const url = `https://qqshow2000.com${encodeURI(imageRelPath)}`;
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error(`Failed to load asset: ${imageRelPath}`);
+      const buf = await resp.arrayBuffer();
+      const bytes = new Uint8Array(buf);
+
+      // Check GIF header (GIF87a or GIF89a)
+      if (bytes[0] === 0x47 && bytes[1] === 0x49 && bytes[2] === 0x46) {
+        const reader = new GifReader(bytes);
+        const numFrames = reader.numFrames();
+        const frames = [];
+        const delays = [];
+        for (let i = 0; i < numFrames; i++) {
+          const frameInfo = reader.frameInfo(i);
+          const rgba = new Uint8ClampedArray(reader.width * reader.height * 4);
+          reader.decodeAndBlitFrameRGBA(i, rgba);
+          frames.push(new ImageData(rgba, reader.width, reader.height));
+          const dur = Math.max((frameInfo.delay || 10) * 10, 20);
+          delays.push(dur);
+        }
+        return {
+          frames,
+          delays,
+          width: reader.width,
+          height: reader.height,
+          totalCycle: delays.reduce((a, b) => a + b, 0),
+        };
+      } else {
+        // PNG or static image fallback
+        const blob = new Blob([buf]);
+        const img = await new Promise((resolve, reject) => {
+          const el = new Image();
+          el.onload = () => resolve(el);
+          el.onerror = reject;
+          el.src = URL.createObjectURL(blob);
+        });
+        const c = document.createElement("canvas");
+        c.width = img.width || 140;
+        c.height = img.height || 226;
+        const cx = c.getContext("2d");
+        cx.drawImage(img, 0, 0);
+        const imgData = cx.getImageData(0, 0, c.width, c.height);
+        return {
+          frames: [imgData],
+          delays: [1000],
+          width: c.width,
+          height: c.height,
+          totalCycle: 1000,
+        };
+      }
+    }
+
+    async function generateOutfitClientSide(urlInput, scale, bgMode, onStatus) {
+      const outfitId = extractOutfitId(urlInput);
+      onStatus("Fetching outfit blueprint from Supabase...");
+
+      const endpoint = `${SUPABASE_URL}/rest/v1/shares?id=eq.${encodeURIComponent(outfitId)}&select=*`;
+      const res = await fetch(endpoint, {
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        },
+      });
+      if (!res.ok) throw new Error(`Supabase query failed: ${res.statusText}`);
+      const dataArr = await res.json();
+      if (!dataArr || dataArr.length === 0) {
+        throw new Error(`Outfit with ID "${outfitId}" not found in database.`);
+      }
+
+      const outfitData = dataArr[0];
+      const outfitName = outfitData.name || "My Outfit";
+      const layers = resolveLayers(outfitData);
+
+      onStatus(`Downloading and decoding ${layers.length} layer GIFs...`);
+      const loadedLayers = [];
+      let hasBackground = false;
+
+      for (let i = 0; i < layers.length; i++) {
+        const l = layers[i];
+        if (!l.image) continue;
+        if (l.category === "backgrounds" || l.category === "background-decor") {
+          hasBackground = true;
+        }
+        onStatus(`Loading layer ${i + 1}/${layers.length}: ${l.name || l.category}...`);
+        const asset = await loadLayerAsset(l.image);
+        loadedLayers.push({
+          category: l.category,
+          name: l.name || l.category,
+          z_index: LAYER_Z_INDEX[l.category] ?? 999,
+          is_default: !!l.isDefault,
+          frames: asset.frames,
+          delays: asset.delays,
+          totalCycle: asset.totalCycle,
+          width: asset.width,
+          height: asset.height,
+        });
+      }
+
+      const nativeWidth = loadedLayers[0]?.width || 140;
+      const nativeHeight = loadedLayers[0]?.height || 226;
+
+      // Calculate animation timeline (LCM)
+      const animatedCycles = loadedLayers
+        .filter((l) => l.frames.length > 1)
+        .map((l) => l.totalCycle);
+
+      let totalLoopMs = animatedCycles.length > 0 ? animatedCycles.reduce(lcm) : 1000;
+      if (totalLoopMs > 12000) totalLoopMs = 12000; // Cap loop duration to 12s
+
+      const timestamps = new Set([0]);
+      for (const l of loadedLayers) {
+        if (l.frames.length <= 1) continue;
+        let t = 0;
+        while (t < totalLoopMs) {
+          for (const d of l.delays) {
+            t += d;
+            if (t < totalLoopMs) timestamps.add(t);
+          }
+        }
+      }
+
+      const sortedTimestamps = Array.from(timestamps).sort((a, b) => a - b);
+      const intervals = [];
+      for (let i = 0; i < sortedTimestamps.length; i++) {
+        const tStart = sortedTimestamps[i];
+        const tEnd = i + 1 < sortedTimestamps.length ? sortedTimestamps[i + 1] : totalLoopMs;
+        const dur = tEnd - tStart;
+        if (dur > 0) intervals.push({ tStart, dur });
+      }
+
+      onStatus(`Compositing ${intervals.length} animation frames...`);
+
+      // Canvas setup
+      const baseCanvas = document.createElement("canvas");
+      baseCanvas.width = nativeWidth;
+      baseCanvas.height = nativeHeight;
+      const baseCtx = baseCanvas.getContext("2d");
+
+      const layerCanvas = document.createElement("canvas");
+      layerCanvas.width = nativeWidth;
+      layerCanvas.height = nativeHeight;
+      const layerCtx = layerCanvas.getContext("2d");
+
+      const outWidth = nativeWidth * scale;
+      const outHeight = nativeHeight * scale;
+      const scaleCanvas = document.createElement("canvas");
+      scaleCanvas.width = outWidth;
+      scaleCanvas.height = outHeight;
+      const scaleCtx = scaleCanvas.getContext("2d");
+      scaleCtx.imageSmoothingEnabled = false;
+
+      // Determine background color
+      let isTransparent = false;
+      let clearColor = null;
+      if (bgMode === "canvas" || (bgMode === "auto" && !hasBackground)) {
+        clearColor = "#f8f8f8";
+      } else if (bgMode === "transparent") {
+        isTransparent = true;
+      } else if (bgMode.startsWith("#")) {
+        clearColor = bgMode;
+      } else if (!hasBackground) {
+        clearColor = "#f8f8f8";
+      }
+
+      const gif = GIFEncoder();
+      const mergedFrames = [];
+
+      for (let idx = 0; idx < intervals.length; idx++) {
+        const { tStart, dur } = intervals[idx];
+
+        // Clear canvas
+        if (clearColor) {
+          baseCtx.fillStyle = clearColor;
+          baseCtx.fillRect(0, 0, nativeWidth, nativeHeight);
+        } else {
+          baseCtx.clearRect(0, 0, nativeWidth, nativeHeight);
+        }
+
+        // Composite active frames in layer order
+        for (const l of loadedLayers) {
+          let activeFrame;
+          if (l.frames.length === 1) {
+            activeFrame = l.frames[0];
+          } else {
+            const tInCycle = tStart % l.totalCycle;
+            let elapsed = 0;
+            let frameIdx = 0;
+            for (let f = 0; f < l.delays.length; f++) {
+              if (elapsed + l.delays[f] > tInCycle) {
+                frameIdx = f;
+                break;
+              }
+              elapsed += l.delays[f];
+            }
+            activeFrame = l.frames[frameIdx];
+          }
+
+          layerCtx.putImageData(activeFrame, 0, 0);
+          baseCtx.drawImage(layerCanvas, 0, 0);
+        }
+
+        // Scale if needed
+        let finalCtx = baseCtx;
+        if (scale > 1) {
+          scaleCtx.clearRect(0, 0, outWidth, outHeight);
+          scaleCtx.drawImage(baseCanvas, 0, 0, outWidth, outHeight);
+          finalCtx = scaleCtx;
+        }
+
+        const imgData = finalCtx.getImageData(0, 0, outWidth, outHeight);
+        const rgba = new Uint8Array(imgData.data.buffer);
+
+        // Check for deduplication with previous frame
+        if (
+          mergedFrames.length > 0 &&
+          arraysEqual(rgba, mergedFrames[mergedFrames.length - 1].rgba)
+        ) {
+          mergedFrames[mergedFrames.length - 1].dur += dur;
+        } else {
+          mergedFrames.push({ rgba, dur });
+        }
+      }
+
+      onStatus(`Quantizing palettes and writing ${mergedFrames.length} GIF frames...`);
+
+      for (let m = 0; m < mergedFrames.length; m++) {
+        const { rgba, dur } = mergedFrames[m];
+        if (isTransparent) {
+          const palette = quantize(rgba, 256, { format: "rgba4444" });
+          const index = applyPalette(rgba, palette, "rgba4444");
+          gif.writeFrame(index, outWidth, outHeight, {
+            palette,
+            delay: dur,
+            transparent: true,
+            transparentIndex: 0,
+          });
+        } else {
+          const palette = quantize(rgba, 256, { format: "rgb565" });
+          const index = applyPalette(rgba, palette, "rgb565");
+          gif.writeFrame(index, outWidth, outHeight, {
+            palette,
+            delay: dur,
+          });
+        }
+      }
+
+      gif.finish();
+      const outputBytes = gif.bytes();
+      const blob = new Blob([outputBytes], { type: "image/gif" });
+      const gifDataUrl = URL.createObjectURL(blob);
+
+      return {
+        id: outfitId,
+        name: outfitName,
+        dimensions: [outWidth, outHeight],
+        scale,
+        frame_count: mergedFrames.length,
+        total_duration_ms: mergedFrames.reduce((a, b) => a + b.dur, 0),
+        file_size_bytes: outputBytes.length,
+        layers: loadedLayers.map((l) => ({
+          category: l.category,
+          name: l.name,
+          z_index: l.z_index,
+          is_default: l.is_default,
+          frame_count: l.frames.length,
+          cycle_ms: l.totalCycle,
+        })),
+        filename: `qqshow_${outfitId}_${scale}x.gif`,
+        gif_data_url: gifDataUrl,
+      };
+    }
+
+    function arraysEqual(a, b) {
+      if (a.length !== b.length) return false;
+      for (let i = 0; i < a.length; i += 4) {
+        if (a[i] !== b[i] || a[i + 1] !== b[i + 1] || a[i + 2] !== b[i + 2] || a[i + 3] !== b[i + 3]) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    // Local Storage History Methods
+    function getFavedFits() {
+      try {
+        const raw = localStorage.getItem(FAVES_KEY);
+        if (!raw) {
+          const initial = [{
+            id: 'e9fn6oxd',
+            name: 'My Outfit',
+            timestamp: Date.now()
+          }];
+          localStorage.setItem(FAVES_KEY, JSON.stringify(initial));
+          return initial;
+        }
+        return JSON.parse(raw);
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveFavedFits(fits) {
+      try {
+        localStorage.setItem(FAVES_KEY, JSON.stringify(fits));
+      } catch (e) {
+        console.error('Failed to save to localStorage', e);
+      }
+      renderHistory();
+    }
+
+    function addFaveFit(fit) {
+      let fits = getFavedFits();
+      fits = fits.filter(f => f.id !== fit.id);
+      fits.unshift(fit);
+      if (fits.length > 50) fits = fits.slice(0, 50);
+      saveFavedFits(fits);
+    }
+
+    function removeFaveFit(id) {
+      let fits = getFavedFits();
+      fits = fits.filter(f => f.id !== id);
+      saveFavedFits(fits);
+    }
+
+    function loadFitToUrl(id) {
+      const url = `https://qqshow2000.com/?id=${id}`;
+      const input = document.getElementById('urlInput');
+      input.value = url;
+      input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      input.focus();
+    }
+
+    function copyFitUrl(id, btnElement) {
+      const url = `https://qqshow2000.com/?id=${id}`;
+      navigator.clipboard.writeText(url).then(() => {
+        const origText = btnElement.innerHTML;
+        btnElement.innerHTML = '✓ Copied!';
+        btnElement.classList.add('copied');
+        setTimeout(() => {
+          btnElement.innerHTML = origText;
+          btnElement.classList.remove('copied');
+        }, 1500);
+      }).catch(err => {
+        prompt('Copy this URL:', url);
+      });
+    }
+
+    function renderHistory() {
+      const container = document.getElementById('historyContainer');
+      if (!container) return;
+      const fits = getFavedFits();
+
+      if (fits.length === 0) {
+        container.innerHTML = `
+          <div class="history-empty">
+            No fits saved yet. Generate an outfit to see it saved here, or <a href="javascript:void(0)" onclick="loadFitToUrl('e9fn6oxd')" class="banner-link">load the example fit (e9fn6oxd)</a>.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = '';
+      fits.forEach(fit => {
+        const row = document.createElement('div');
+        row.className = 'history-item';
+        const dateStr = fit.timestamp ? new Date(fit.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '';
+        const qqUrl = `https://qqshow2000.com/?id=${fit.id}`;
+
+        row.innerHTML = `
+          <div class="history-info">
+            <span class="history-id">${fit.id}</span>
+            <span class="history-name">${escapeHtml(fit.name || 'Outfit')}</span>
+            ${dateStr ? `<span class="history-date">${dateStr}</span>` : ''}
+          </div>
+          <div class="history-actions">
+            <button class="btn-action" onclick="loadFitToUrl('${fit.id}')" title="Send to URL input box above">
+              Load
+            </button>
+            <a class="btn-action" href="${qqUrl}" target="_blank" rel="noopener noreferrer" title="Open on qqshow2000.com in a new tab">
+              QQ Show URL
+            </a>
+            <button class="btn-action btn-copy" onclick="copyFitUrl('${fit.id}', this)" title="Copy URL to clipboard">
+              Copy
+            </button>
+            <button class="btn-action btn-delete" onclick="removeFaveFit('${fit.id}')" title="Remove from favorites">
+              ✕
+            </button>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    async function generateOutfit() {
+      const urlInput = document.getElementById('urlInput').value.trim();
+      if (!urlInput) return;
+
+      const scale = parseInt(document.getElementById('scaleSelect').value, 10);
+      const bg = document.getElementById('bgSelect').value;
+      const btn = document.getElementById('generateBtn');
+      const loading = document.getElementById('loading');
+      const loadingText = document.getElementById('loadingText');
+      const errBanner = document.getElementById('errorBanner');
+      const resultSec = document.getElementById('resultSection');
+
+      btn.disabled = true;
+      loading.style.display = 'flex';
+      errBanner.style.display = 'none';
+      resultSec.style.display = 'none';
+
+      try {
+        let data;
+        // Check if Python local backend is running (optional)
+        const isLocalServer = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+        
+        if (isLocalServer && window.location.protocol.startsWith("http")) {
+          try {
+            loadingText.textContent = "Connecting to local backend...";
+            const resp = await fetch("/api/generate", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ url: urlInput, scale, bg_mode: bg }),
+            });
+            if (resp.ok) {
+              data = await resp.json();
+            }
+          } catch (e) {
+            console.log("Local backend not available, running in browser:", e);
+          }
+        }
+
+        // Run full client-side browser engine (GitHub Pages & standalone)
+        if (!data) {
+          data = await generateOutfitClientSide(urlInput, scale, bg, (msg) => {
+            loadingText.textContent = msg;
+          });
+        }
+
+        // Render preview and metadata
+        document.getElementById('previewImg').src = data.gif_data_url;
+        const dlLink = document.getElementById('downloadLink');
+        dlLink.href = data.gif_data_url;
+        dlLink.download = data.filename;
+
+        document.getElementById('outfitName').textContent = data.name;
+        document.getElementById('outfitIdTag').textContent = 'ID: ' + data.id;
+        document.getElementById('metaDimensions').textContent = data.dimensions[0] + ' x ' + data.dimensions[1];
+        document.getElementById('metaFrames').textContent = data.frame_count;
+        document.getElementById('metaDuration').textContent = (data.total_duration_ms / 1000).toFixed(1) + 's';
+        document.getElementById('metaSize').textContent = formatBytes(data.file_size_bytes);
+
+        document.getElementById('layersCount').textContent = data.layers.length;
+        const tbody = document.getElementById('layersBody');
+        tbody.innerHTML = '';
+        data.layers.forEach(l => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><span class="z-tag">${String(l.z_index).padStart(2, '0')}</span></td>
+            <td><strong>${l.category}</strong> ${l.is_default ? '<em style="color:#999; font-size:11px;">(default)</em>' : ''}</td>
+            <td>${l.name}</td>
+            <td>${l.frame_count}</td>
+            <td>${l.cycle_ms}ms</td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        // Automatically save to favorites history
+        addFaveFit({
+          id: data.id,
+          name: data.name,
+          timestamp: Date.now()
+        });
+
+        resultSec.style.display = 'grid';
+      } catch (err) {
+        errBanner.textContent = 'Error: ' + err.message;
+        errBanner.style.display = 'block';
+      } finally {
+        btn.disabled = false;
+        loading.style.display = 'none';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', renderHistory);
+    renderHistory();
+  </script>
+
+</body>
+</html>

@@ -723,7 +723,7 @@ HTML_PAGE = """<!DOCTYPE html>
   <div class="main-window history-window">
     <div class="window-header">
       <div class="window-title">
-        <strong>History</strong> &nbsp;— Fits You Faved
+        <strong>History</strong> &nbsp;- Fits You Faved
       </div>
       <div class="history-header-right">
         <em>🔒 Private Local Storage (stored only on your device)</em>
@@ -963,7 +963,23 @@ class OutfitSaverHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.end_headers()
-            self.wfile.write(HTML_PAGE.encode("utf-8"))
+            if os.path.exists("index.html"):
+                with open("index.html", "rb") as f:
+                    self.wfile.write(f.read())
+            else:
+                self.wfile.write(HTML_PAGE.encode("utf-8"))
+        elif parsed.path.startswith("/vendor/"):
+            file_name = os.path.basename(parsed.path)
+            file_path = os.path.join("vendor", file_name)
+            if os.path.exists(file_path):
+                self.send_response(200)
+                self.send_header("Content-Type", "application/javascript; charset=utf-8")
+                self.send_header("Content-Length", str(os.path.getsize(file_path)))
+                self.end_headers()
+                with open(file_path, "rb") as f:
+                    self.wfile.write(f.read())
+            else:
+                self.send_error(404, "Vendor file not found")
         elif parsed.path.startswith("/outputs/"):
             # Serve saved GIF file
             file_name = os.path.basename(parsed.path)
@@ -977,8 +993,22 @@ class OutfitSaverHandler(BaseHTTPRequestHandler):
                     self.wfile.write(f.read())
             else:
                 self.send_error(404, "File not found")
+        elif os.path.exists(parsed.path.lstrip("/")):
+            rel_path = parsed.path.lstrip("/")
+            self.send_response(200)
+            if rel_path.endswith(".gif"):
+                self.send_header("Content-Type", "image/gif")
+            elif rel_path.endswith(".png"):
+                self.send_header("Content-Type", "image/png")
+            else:
+                self.send_header("Content-Type", "application/octet-stream")
+            self.send_header("Content-Length", str(os.path.getsize(rel_path)))
+            self.end_headers()
+            with open(rel_path, "rb") as f:
+                self.wfile.write(f.read())
         else:
             self.send_error(404, "Not found")
+
 
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)
