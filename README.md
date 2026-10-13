@@ -12,47 +12,19 @@
 
 ## 🌸 About & Cultural Context
 
-Back in the day, **staRpauSe** had a great time playing with [KiSS dolls](https://en.wikipedia.org/wiki/Kisekae_Set_System) (Kisekae Set System). It's really cool to see early character configurators built for pure personal expression and digital identity. These avatars comfortably predate the modern NFT PFP craze and remain vital cultural touchpoints of early web history to preserve for future generations to discover themselves.
+Met [Viola](https://viola.city) at [TIAT postgeneration](https://luma.com/postgeneration). She was showing something totally different. I found her [Qzone Museum](https://viola.city) on her site and fell in.
 
-We discovered the QQ Show revival via **[viola.city's Qzone Museum](https://viola.city/projects/qzone-museum/)**, a wonderful rabbit hole into Y2K Chinese web culture.
+It felt familiar. 1996, anime fan, no resources. [KiSS dolls](https://en.wikipedia.org/wiki/Kisekae_Set_System) were a huge step up from uuencoded images off Usenet. Download a doll, dress it up, get the whole character. All fan made. I was running Dragon Ball Project then, sourcing raws / scans / lettering, Jason on translations. KiSS was my guilty pleasure too. Not allowed to have dolls, so I played dress up without asking permission.
 
-A huge shout-out to **[Kay Zeng](https://www.kayzeng.com/)** for her brilliant work designing and resurrecting **[qqshow2000.com](https://qqshow2000.com)**!
+Six weeks in China with my 6 month old, meeting family, made it click again. QZone next to MySpace in my head. Same era. Your own space, vibrant customization. Computer lib as a global phenomenon.
 
----
+Kay Zeng's [QQ Show](https://qqshow2000.com) is that impulse turned all the way up. Super busy GIF composites. Too much on purpose. Unapologetically dumb and unapologetically cute. Same as my [Hyphy Kawaii](https://news.codame.com/p/hyphy-kawaii) work.
 
-### History of QQ Show (QQ秀)
+This tool is just a fix. Right click only saves one layer. Now you can save the whole fit and share it wherever you are comfortable.
 
-[QQ](https://en.wikipedia.org/wiki/Tencent_QQ) is a Chinese chat and social media platform created by Tencent in 1999. In 2003, Tencent launched **QQ Show**, a virtual avatar dress-up feature that remained active until 2021. Users could customize their digital personas with clothing and accessories that appeared across the QQ world. 
+The PFP lesson: real value is not floor price. It is people remixing after hype dies. [CC remix culture](https://creativecommons.org/) plus community building. Avatars and aliases are identity and privacy practice. My [DataBabies333 Picrew maker](https://picrew.me/en/image_maker/2720340) is still alive for people to appropriate the assets, even after the hype passed.
 
-QQ Show was directly inspired by Sayclub, one of Korea's biggest chat platforms in the 2000s, which gradually lost ground a decade later due to competition and failing to adapt to the emerging smartphone era. In a different trajectory, Tencent won its home market with its technology and product strategy. QQ Show achieved massive scale in China, attracting over 100 million users and establishing virtual goods as a major revenue stream. 
-
-The aesthetic featured the "purikura" and "blingee" style popular in early 2000s Asia: sparkly graphics, bright colors, and maximalist design elements that were part of the broader Y2K cultural movement. Despite shaping the internet culture and aesthetic for hundreds of millions of users in China, QQ Show remains relatively unknown outside the Chinese internet spheres. 
-
-[qqshow2000.com](https://qqshow2000.com) recreates QQ Show using GIF assets recovered from the [Internet Archive Wayback Machine](https://archive.org/), aiming to make its mark on Chinese internet history visible to the international internet community.
-
-> *(qqshow2000.com is designed and made by [Kay Zeng](https://www.kayzeng.com/) as she's thinking about the QQ Show items she bought with her snack money.)*  
-> *This is an unofficial, non-profit digital archive project for artistic, educational, and research purposes only. All assets were recovered from the Internet Archive Wayback Machine. Copyright remains with Tencent Holdings Limited. For takedown requests, please contact: qqshow2000project@gmail.com*  
-> - **Sep 22, 2025:** website launched with 827 items collected by Kay Zeng  
-> - **Oct 17, 2025:** added 200 items collected by @晋文公 from Rednote (小红书)
-
-<details>
-<summary><strong>中文简介 (About QQ Show in Chinese)</strong></summary>
-
-[QQ](https://en.wikipedia.org/wiki/Tencent_QQ)是腾讯于1999年创建的中国聊天社交平台。在2003年，腾讯推出了虚拟形象装扮产品QQ秀，用户可以为自己在QQ世界中的数字化身搭配服装和配饰。直至2021年，QQ秀被腾讯下架。 
-
-QQ秀的创建借鉴了Sayclub，2000年代韩国最大的聊天平台之一。Sayclub在后来由于竞争和未能适应新兴的智能手机时代而在韩国逐渐失去了市场地位。腾讯则走向了不同的轨迹，凭借其技术和产品策略赢得了本土市场竞争。QQ秀在中国取得了巨大成功，吸引了超过1亿用户，并确立了虚拟商品作为主要收入来源的商业模式。 
-
-其美学风格具有2000年代初期亚洲流行的"大头贴"和"闪图"特色，包括闪闪发光的图形、明亮的色彩和极繁主义设计元素，这些都是更广泛的Y2K文化运动的一部分。尽管QQ秀影响了中国数亿用户和早期的中国互联网文化审美，但在中文互联网以外仍相对不为人知。此项目使用从[Internet Archive Wayback Machine](https://archive.org/)恢复收集的gif素材重现QQ秀，旨在让中国互联网历史上的这一印记被更广阔的互联网社区看见。
-
-
-qqshow2000.com由[Kay Zeng](https://www.kayzeng.com/)设计制作。时至今日，她已经忘记了自己曾在QQ秀和各种钻石会员上花了多少钱。
-
-这是一个非官方、非营利的数字档案项目，仅用于艺术、教育和研究目的。所有素材均从Internet Archive Wayback Machine中恢复收集。版权归腾讯控股有限公司所有。如需删除下架，请联系qqshow2000project@gmail.com。
-
-- **2025年9月22日:** 网站上线，收录了827件由Kay Zeng收集整理的装扮  
-- **2025年10月17日:** 上新了200件由小红书网友@晋文公收集的装扮
-
-</details>
+If this clicks, check out more of my artwork, starting with [Hyphy Kawaii](https://news.codame.com/p/hyphy-kawaii).
 
 ---
 
